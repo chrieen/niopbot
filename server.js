@@ -158,4 +158,4 @@ process.on("unhandledRejection", err => {
   console.error("Uncaught Promise Error: ", err);
 });
 
-client.login(ayarlar.token)
+client.login(process.env.token)

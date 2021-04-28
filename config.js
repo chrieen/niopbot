@@ -1,5 +1,4 @@
 const config = {
-  "token": "",//TOKEN
   "sahip": "",//SAHİP İD
 
   "dashboard" : {
