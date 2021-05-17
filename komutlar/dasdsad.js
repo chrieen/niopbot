@@ -11,7 +11,7 @@ exports.run = async (client, message, args) => {
       if(!isim) return message.channel.sendEmbed(new Discord.RichEmbed().addField(`Hatalı Kullanım` , `Lütfen Bir İsim Yazın!`).setColor("RANDOM").setFooter(message.author.tag ,message.author.avatarURL).setTimestamp());
    let yas = args[2]
       if(!yas) return message.channel.sendEmbed(new Discord.RichEmbed().addField(`Hatalı Kullanım` , `Lütfen Bir Yaş Yazın!`).setColor("RANDOM").setFooter(message.author.tag ,message.author.avatarURL).setTimestamp());    
-  member.addRole('KIZ ROL İD')
+  member.addRole('ERKEK ROL İD')
   member.removeRole('KAYITSIZ ROL İD')
   message.react('EMOJİ İD')
   const db = require('quick.db')
@@ -24,19 +24,19 @@ exports.run = async (client, message, args) => {
     .setTimestamp()
   let embed = new Discord.RichEmbed() 
   .setColor("BLACK")
-  .addField(`Safe Code - Salvo`, `${member.user} **Adlı Üye <@&KIZ ROL İD> Rolünü Verdim ve Sunucuya Kaydettim**`).setFooter(message.author.tag ,message.author.avatarURL)
+  .addField(`Safe Code - Salvo`, `${member.user} **Adlı Üye <@&ERKEK ROL İD> Rolünü Verdim ve Sunucuya Kaydettim**`).setFooter(message.author.tag ,message.author.avatarURL)
   .setTimestamp()
   return message.channel.send(embed).then(kanal.send(embed1))
 }
 exports.conf = {
   enabled: true,
   guildOnly: true,
-  aliases: ["bayan","kız","k","kadın"],
+  aliases: ["bay","erkek","e","adam"],
   kategori: "Yetkili Komutları",
   permLevel: 0
 }
 exports.help = {
-  name: 'kız',
-  description: "Sunucuya Kız Olarak Kayıt Eder",
-  usage: '!kız @kullanıcı İsim Yaş'
+  name: 'Deneme',
+  description: "Sunucuya Erkek Olarak Kayıt Eder",
+  usage: 'kız'
 } 

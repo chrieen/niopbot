@@ -3,10 +3,34 @@ footer {
   text-align: center;
 }
 
+footer a:hover {
+  text-decoration: none;
+}
+
 footer ul {
   list-style: none;
 }
 
 footer li {
-  display:
+  display: inline-block;
+  padding: 0 1rem
 }
+
+footer li a {
+  font-size: 20px;
+}
+
+footer ul i {
+  margin-left: 3px;
+  font-size: 20px;
+}
+
+footer li a {
+  color: #fff;
+}
+
+footer li a i{
+  color: #00bc8c;
+}
+
+

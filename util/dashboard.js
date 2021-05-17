@@ -104,6 +104,10 @@ module.exports = (client) => {
     renderTemplate(res, req, "autherror.ejs");
   });
   
+    app.get("/sponsor", (req, res) => {
+    renderTemplate(res, req, "sponsor.ejs");
+  });
+  
   app.get("/logout", function(req, res) {
     req.session.destroy(() => {
       req.logout();
@@ -120,65 +124,11 @@ module.exports = (client) => {
     renderTemplate(res, req, "dashboard.ejs", {perms});
   });
   
-  app.get("/dashboard/:guildID", checkAuth, (req, res) => {
-    res.redirect(`/dashboard/${req.params.guildID}/manage`);
-  });
-
-  app.get("/dashboard/:guildID/manage", checkAuth, (req, res) => {
-    const guild = client.guilds.get(req.params.guildID);
-    if (!guild) return res.status(404);
-    const isManaged = guild && !!guild.member(req.user.id) ? guild.member(req.user.id).permissions.has("MANAGE_GUILD") : false;
-    if (!isManaged && !req.session.isAdmin) res.redirect("/");
-    renderTemplate(res, req, "guild/manage.ejs", {guild});
-  });
   
-  app.post("/dashboard/:guildID/manage", checkAuth, (req, res) => {
-    const guild = client.guilds.get(req.params.guildID);
-    if (!guild) return res.status(404);
-    const isManaged = guild && !!guild.member(req.user.id) ? guild.member(req.user.id).permissions.has("MANAGE_GUILD") : false;
-    if (!isManaged && !req.session.isAdmin) res.redirect("/");
-    let ayar = req.body
-    if (ayar === {}) return;
-    
-    if (ayar['prefix']) db.set(`prefix_${guild.id}`, ayar['prefix'])
-    
-    if (ayar['sayac']) db.set(`sayac_${guild.id}`, ayar['sayac'])
-    
-    if (ayar['otorol']) db.set(`otorol_${guild.id}`, ayar['otorol'])
-    
-    if (ayar['gmesaj']) db.set(`girism_${guild.id}`, ayar['gmesaj'],)
-    
-     if (ayar['cmesaj']) db.set(`cikism_${guild.id}`, ayar['cmesaj'],)
-    
-    if (ayar['girisk']) db.set(`mgcK_${guild.id}`, ayar['girisk'],)
-    
-    res.redirect("/dashboard/"+req.params.guildID+"/manage");
-  });
+ 
   
-
-  
-  app.get("/dashboard/:guildID/leave", checkAuth, async (req, res) => {
-    const guild = client.guilds.get(req.params.guildID);
-    if (!guild) return res.status(404);
-    const isManaged = guild && !!guild.member(req.user.id) ? guild.member(req.user.id).permissions.has("MANAGE_GUILD") : false;
-    if (!isManaged && !req.session.isAdmin) res.redirect("/");
-    await guild.leave();
-    res.redirect("/dashboard");
-  });
-  
-  app.get("/dashboard/:guildID/reset", checkAuth, async (req, res) => {
-    const guild = client.guilds.get(req.params.guildID);
-    if (!guild) return res.status(404);
-    const isManaged = guild && !!guild.member(req.user.id) ? guild.member(req.user.id).permissions.has("MANAGE_GUILD") : false;
-    if (!isManaged && !req.session.isAdmin) res.redirect("/");
-    
-    db.delete(`prefix_${guild.id}`)
-
-    res.redirect("/dashboard/"+req.params.guildID);
-  });
-  
-    app.get("/commands", (req, res) => {
-    renderTemplate(res, req, "commands.ejs", {md});
+    app.get("/komutlar", (req, res) => {
+    renderTemplate(res, req, "komutlar.ejs", {md});
   });
   
   app.get("/stats", (req, res) => {
@@ -206,10 +156,7 @@ module.exports = (client) => {
     renderTemplate(res, req, "dashboard.ejs", {perms});
   });
   
-  app.get("/admin", checkAuth, (req, res) => {
-    if (!req.session.isAdmin) return res.redirect("/");
-    renderTemplate(res, req, "admin.ejs");
-  });
+
 
 app.get("/dashboard/:guildID/members", checkAuth, async (req, res) => {
     const guild = client.guilds.get(req.params.guildID);
