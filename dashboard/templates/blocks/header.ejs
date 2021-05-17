@@ -11,6 +11,8 @@
     <meta property="og:image" content="<%= bot.user.displayAvatarURL %>"/>
     <meta property="og:site_name" content="<%= bot.user.username %> Kontrol Paneli">
     <meta property="og:locale" content="en_US">
+    
+    	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.2.0/css/all.css">
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -21,6 +23,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="/public/css/darkly.css">
+    <link rel="stylesheet" href="/public/css/style.css">
     <link rel="stylesheet" href="/public/css/dashboard.css" />
     <link rel='icon' href='<%= bot.user.avatarURL %>'>
 
@@ -38,6 +41,8 @@
           <ul style="background-color: #202529;" class="navbar-nav mr-auto">
             <li style="background-color: #202529;" class="nav-item"><a class="nav-link" href="/commands">Komutlar</a></li>
             <li style="background-color: #202529;" class="nav-item"><a class="nav-link" href="/dashboard">Yönetim Paneli</a></li>
+                        <li style="background-color: #202529;" class="nav-item"><a class="nav-link" href="https://discord.gg/ADMUXGQyxu">Discord</a></li>
+
           </ul>
           <ul class="navbar-nav">
             <% if(user) { %>
@@ -60,25 +65,7 @@
         </div>
       </div>
     </nav>
-    <div class="container">
-      <div class="nav-breadcrumb" style="width: 100%; margin-bottom: 20px;">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/">Anasayfa</a></li>
-          <%
-            pathArray = path.split("/").slice(1);
-            pathArray = pathArray.map(p=> {
-              if (bot.guilds.has(p)) return bot.guilds.get(p).name;
-              return p.toProperCase();
-            });
-            let builtPath = "";
-            for(let i = 0; i < pathArray.length; i++) {
-              builtPath += "/"+path.split("/").slice(1)[i]; %>
-              <li class="breadcrumb-item<% if((i+1) === pathArray.length) { %> active">
-              <%= pathArray[i] %>
-            <% } else { %>">
-              <a href="<%= builtPath %>"><%= pathArray[i] %></a>
-            <% } %>
-          <% } %>
+    
           </li>
         </ol>
       </div>
