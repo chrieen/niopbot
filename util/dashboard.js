@@ -119,9 +119,9 @@ module.exports = (client) => {
     renderTemplate(res, req, "index.ejs");
   });
 
-  app.get("/dashboard", checkAuth, (req, res) => {
+  app.get("/panel", checkAuth, (req, res) => {
     const perms = Discord.EvaluatedPermissions;
-    renderTemplate(res, req, "dashboard.ejs", {perms});
+    renderTemplate(res, req, "panel.ejs", {perms});
   });
   
   
@@ -151,9 +151,9 @@ module.exports = (client) => {
     });
   });
 
-  app.get("/dashboard", checkAuth, (req, res) => {
+  app.get("/panel", checkAuth, (req, res) => {
     const perms = Discord.EvaluatedPermissions;
-    renderTemplate(res, req, "dashboard.ejs", {perms});
+    renderTemplate(res, req, "panel.ejs", {perms});
   });
   
 
@@ -222,7 +222,7 @@ app.get("/dashboard/:guildID/members", checkAuth, async (req, res) => {
     });
   });
   
-  app.get("/dashboard/:guildID/stats", checkAuth, (req, res) => {
+  app.get("/panel/:guildID/stats", checkAuth, (req, res) => {
     const guild = client.guilds.get(req.params.guildID);
     if (!guild) return res.status(404);
     const isManaged = guild && !!guild.member(req.user.id) ? guild.member(req.user.id).permissions.has("MANAGE_GUILD") : false;
