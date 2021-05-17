@@ -181,6 +181,10 @@ module.exports = (client) => {
     renderTemplate(res, req, "commands.ejs", {md});
   });
   
+  app.get("/sunucu", (req, res) => {
+    renderTemplate(res, req, "sunucu.ejs", {md});
+  });
+  
   app.get("/stats", (req, res) => {
     const duration = moment.duration(client.uptime).format(" D [days], H [hrs], m [mins], s [secs]");
     const members = client.guilds.reduce((p, c) => p + c.memberCount, 0);
