@@ -11,7 +11,6 @@
   <li class="media" style="padding: 10px;">
     <% if (guild.icon) { %>
     <% } else { %>
-      <canvas style="background-color: green" class="d-flex mr-3 rounded-circle" id="<%= guild.name.split(' ').join('').replace(`'`, ``) %>" width="80px" height="80px"></canvas>
       <script>
         function draw() {
           const ctx = document.getElementById("<%= guild.name.split(' ').join('').replace(`'`, ``) %>").getContext('2d');
@@ -24,9 +23,12 @@
       </script>
     <% } %>
     <div class="media-body">
-      <br>
             <img class="d-flex mr-3 rounded-circle" src="<%= `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png?size=128` %>" style="width: 80px;" alt="">
+
 <br>
+      
+        <h5><%= guild.name %></h5>
+    <br>
         <% 
         let  text;
         let enabled;
@@ -40,7 +42,6 @@
           enabled = bot.appInfo.botPublic;
         }
         %> 
-      
         <a style="border-color: #313131; background-color: #333;-webkit-box-shadow: 0px 10px 13px -7px #000000, 9px 5px 15px 4px rgba(0,0,0,0.5); box-shadow: 0px 10px 13px -7px #000000, 9px 5px 15px 4px rgba(0,0,0,0.5);" class="btn btn-primary btn-lg<% if(!enabled) { %> disabled<% } %>" role="button" href="<%= href %>"><%= text %> </i></a>
       </div>
     </li>
