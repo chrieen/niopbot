@@ -13,17 +13,16 @@ setInterval( async () => {
       client.appInfo = await client.fetchApplication();
     }, 60000);
   require("../util/dashboard.js")(client);
-console.log('>>Oynuyor kısmı başarıyla güncellendi.');
-console.log('Bot hazır ve giriş yaptı.');
+console.log('Oynuyor Kısmı Güncellendi! | Asreaper');
+console.log('Bota Giriş Yapıldı! | Asreaper');
 console.log(`[${moment().format('YYYY-MM-DD HH:mm:ss')}] BOT: Şu an ` + client.channels.size + ` adet kanala, ` + client.guilds.size + ` adet sunucuya ve ` + client.guilds.reduce((a, b) => a + b.memberCount, 0).toLocaleString() + ` kullanıcıya hizmet veriliyor!`);
     var Games = [
-        "MERTR HER ZAMAN ❤",
-        `YOUTUBE/MERTR ❤`
+        "Asreaper WebPanelli Bot"
     ];
   
   setInterval(function() {
     var random = Math.floor(Math.random()*(Games.length-0+1)+0);
-    client.user.setActivity(Games[random], { type: "STREAMING", url: "https://www.twitch.tv/" } );
+    client.user.setActivity(Games[random], { type: "STREAMING", url: "https://www.twitch.tv/mbasreaper" } );
   }, 2 * 2000);
 
 };
