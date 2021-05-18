@@ -1,7 +1,7 @@
 
 
 <%- include('blocks/header', {bot, user, path}) %>
-<center><h5>Sunucularınız</h5></center>
+<center> <h3><div style="color:red;">Sunucularınız</div></h3> </center>
 <ul class="list-unstyled">
   <% user.guilds.forEach(guild => { 
     const permsOnGuild = new perms(guild.permissions);
@@ -37,7 +37,7 @@ background-color: #111218
 <br>
       
       
-        <h5><%= guild.name %></h5>
+      <h4><div style="color:#00bc8c;"><%= guild.name %></div></h4>
     <br>
         <% 
         let  text;
@@ -52,6 +52,7 @@ background-color: #111218
           enabled = bot.appInfo.botPublic;
         }
         %> 
+
         <a style="border-color: #313131; background-color: #333;-webkit-box-shadow: 0px 10px 13px -7px #000000, 9px 5px 15px 4px rgba(0,0,0,0.5); box-shadow: 0px 10px 13px -7px #000000, 9px 5px 15px 4px rgba(0,0,0,0.5);" class="btn btn-primary btn-lg<% if(!enabled) { %> disabled<% } %>" role="button" href="<%= href %>"><%= text %> </i></a>
       </div>
     </li>
