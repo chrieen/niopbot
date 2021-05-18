@@ -159,3 +159,6 @@ process.on("unhandledRejection", err => {
 });
 
 client.login(process.env.token)
+
+
+///komutlar
