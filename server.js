@@ -35,20 +35,6 @@ client.on('ready', () => {
 });
 
 
-  client.commands = new Discord.Collection();
-client.aliases = new Discord.Collection();
-fs.readdir('./komutlar/', (err, files) => {
-  if (err) console.error(err);
-  log(`${files.length} komut yüklenecek.`);
-  files.forEach(f => {
-    let props = require(`./komutlar/${f}`);
-    log(`Yüklenen komut: ${props.help.name}.`);
-    client.commands.set(props.help.name, props);
-    props.conf.aliases.forEach(alias => {
-      client.aliases.set(alias, props.help.name);
-    });
-  });
-});
 
 client.elevation = message => {
   if(!message.guild) {
@@ -164,47 +150,3 @@ process.on("unhandledRejection", err => {
 client.login(process.env.token)
 
 
-///komutlar
-client.on("guildMemberAdd", member => {
-  const profil = JSON.parse(fs.readFileSync("./sayaç.json", "utf8"));
-  if (!profil[member.guild.id]) return;
-  if (profil[member.guild.id]) {
-    let sayaçkanalID = profil[member.guild.id].kanal;
-    let sayaçsayı = profil[member.guild.id].sayi;
-    let sayaçkanal = client.channels.get(sayaçkanalID);
-    let aralık = parseInt(sayaçsayı) - parseInt(member.guild.members.size);
-    sayaçkanal.sendMessage(
-      "🔹 `" +
-        `${member.user.tag}` +
-        "` Sunucuya Katıldı \n🔹 `" +
-        sayaçsayı +
-        "` Kişi Olmamıza `" +
-        aralık +
-        "` Kişi Kaldı! \n🔹 `" +
-        member.guild.members.size +
-        "` Kişiyiz!"
-    );
-  } 
-});
-
-client.on("guildMemberRemove", member => {
-  const profil = JSON.parse(fs.readFileSync("./sayaç.json", "utf8"));
-  if (!profil[member.guild.id]) return;
-  if (profil[member.guild.id]) {
-    let sayaçkanalID = profil[member.guild.id].kanal;
-    let sayaçsayı = profil[member.guild.id].sayi;
-    let sayaçkanal = client.channels.get(sayaçkanalID);
-    let aralık = parseInt(sayaçsayı) - parseInt(member.guild.members.size);
-    sayaçkanal.sendMessage(
-      "🔸 `" +
-        `${member.user.tag}` +
-        "` Sunucudan Ayrıldı! \n🔸 `" +
-        sayaçsayı +
-        "` Kişi Olmamıza `" +
-        aralık +
-        "` Kişi Kaldı! \n🔸 `" +
-        member.guild.members.size +
-        "` Kişiyiz!"
-    );
-  }
-});

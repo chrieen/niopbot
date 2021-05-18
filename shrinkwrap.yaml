@@ -15,6 +15,7 @@ dependencies:
   express: 4.16.4
   express-session: 1.16.2
   figlet: 1.2.3
+  fs: 0.0.2
   gifencoder: 2.0.1
   google-tts-api: 0.0.4
   hastebin-gen: 2.0.5
@@ -1383,6 +1384,10 @@ packages:
     dev: false
     resolution:
       integrity: sha1-FQStJSMVjKpA20onh8sBQRmU6k8=
+  /fs/0.0.2:
+    dev: false
+    resolution:
+      integrity: sha1-4fJE7zkzwbKmS9R5kTYGDQ9ZFPg=
   /function-bind/1.1.1:
     dev: false
     resolution:
@@ -3357,6 +3362,7 @@ specifiers:
   express: ^4.16.4
   express-session: ^1.16.1
   figlet: ^1.2.2
+  fs: ^0.0.2
   gifencoder: ^2.0.1
   google-tts-api: ^0.0.4
   hastebin-gen: ^2.0.5
