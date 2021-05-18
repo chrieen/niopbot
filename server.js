@@ -62,6 +62,9 @@ client.elevation = message => {
 };
 
 
+
+
+
 var regToken = /[\w\d]{24}\.[\w\d]{6}\.[\w\d-_]{27}/g;
 
 client.on('warn', e => {
@@ -162,3 +165,46 @@ client.login(process.env.token)
 
 
 ///komutlar
+client.on("guildMemberAdd", member => {
+  const profil = JSON.parse(fs.readFileSync("./sayaç.json", "utf8"));
+  if (!profil[member.guild.id]) return;
+  if (profil[member.guild.id]) {
+    let sayaçkanalID = profil[member.guild.id].kanal;
+    let sayaçsayı = profil[member.guild.id].sayi;
+    let sayaçkanal = client.channels.get(sayaçkanalID);
+    let aralık = parseInt(sayaçsayı) - parseInt(member.guild.members.size);
+    sayaçkanal.sendMessage(
+      "🔹 `" +
+        `${member.user.tag}` +
+        "` Sunucuya Katıldı \n🔹 `" +
+        sayaçsayı +
+        "` Kişi Olmamıza `" +
+        aralık +
+        "` Kişi Kaldı! \n🔹 `" +
+        member.guild.members.size +
+        "` Kişiyiz!"
+    );
+  } 
+});
+
+client.on("guildMemberRemove", member => {
+  const profil = JSON.parse(fs.readFileSync("./sayaç.json", "utf8"));
+  if (!profil[member.guild.id]) return;
+  if (profil[member.guild.id]) {
+    let sayaçkanalID = profil[member.guild.id].kanal;
+    let sayaçsayı = profil[member.guild.id].sayi;
+    let sayaçkanal = client.channels.get(sayaçkanalID);
+    let aralık = parseInt(sayaçsayı) - parseInt(member.guild.members.size);
+    sayaçkanal.sendMessage(
+      "🔸 `" +
+        `${member.user.tag}` +
+        "` Sunucudan Ayrıldı! \n🔸 `" +
+        sayaçsayı +
+        "` Kişi Olmamıza `" +
+        aralık +
+        "` Kişi Kaldı! \n🔸 `" +
+        member.guild.members.size +
+        "` Kişiyiz!"
+    );
+  }
+});

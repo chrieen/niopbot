@@ -1,27 +1,44 @@
 const Discord = require('discord.js');
-const db = require('quick.db')
+const fs = require('fs')
+const profil = JSON.parse(fs.readFileSync("./sayaç.json", "utf8"));
+exports.run = (client, message, args) => {
+  if(!message.member.hasPermission("MANAGE_GUILD")) return message.reply("❌ Bu Komutu Kullanabilmek İçin `Sunucuyu Yönet` Yetkisine Sahip Olmalısın!")
+  let mkanal = message.mentions.channels.first()
+  let sayı = args.slice(1);
+  if(!mkanal) return message.reply("❌ Bir Kanal Etiketlemelisin!")
+  if(!sayı) return message.reply("❌ Bir Sayı Girmelisin!")
+  if(sayı < message.guild.members.size) return message.reply("❌ Sayaç Sayısı Sunucudaki Üye Sayısından Fazla Olmalıdır!\n**Üye Sayısı:** " + message.guild.members.size)
+  if(sayı && mkanal) {
+    if(!profil[message.guild.id]) {
+      profil[message.guild.id] = {
+        sayi: sayı,
+        kanal: mkanal 
+      }
+    }
+    if(profil[message.guild.id]) {
+      profil[message.guild.id].sayi = sayı;
+      profil[message.guild.id].kanal = mkanal.id;
+    }
+    fs.writeFile("./sayaç.json", JSON.stringify(profil), (err) => {
+        if(err) message.channel.send("Hata: " + err)
+    })
+    let embed = new Discord.RichEmbed()
+      .setTitle("✅ Sayaç Ayarlandı ✅")
+      .setDescription(`🔸 **Sayaç Kanalı:** ${mkanal}\n🔸 **Sayaç:** \`${sayı}\``)
+      .setFooter(message.author.avatarURL)
+      .setColor("RANDOM")
+      .setTimestamp()
+    message.channel.send(embed)
+  }
+};
 
-exports.run = async (client, message, args) => {
- 
-  let sayi = args[0];
-  let kanal = message.mentions.channels.first();
- 
-  if (!sayi) return message.reply(' Lütfen Bir Sayı Belirtin!')
-  if (!kanal) return message.reply(' Lütfen Bir Kanal Etiketleyin!')
- 
-  db.set(`sayac_${message.guild.id}`, sayi);
-  db.set(`sayacK_${message.guild.id}`, kanal.id);
- 
-  message.channel.send(`Sayaç **${sayi}** \n ${kanal} Olarak Ayarlandı!`)
-}
 exports.conf = {
   enabled: true,
-  guildOnly: false,
-  aliases: ["sayaç-ayarla"],
-  permLevel: 2
-}
+  guildOnly: true,
+  aliases: []
+};
 exports.help = {
-  name: "sayaç",
-  description: "Sayaç ayarlama komutudur.",
-  usage: "sayaç <sayi> <#kanal>"
-}
+  name: 'sayaç',
+  description: 'sayaç sistemi',
+  usage: 'sayaç'
+};
