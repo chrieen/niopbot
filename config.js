@@ -1,11 +1,11 @@
 const config = {
-  "sahip": "795601207002660894",//SAHİP İD
+  "sahip": (process.env.sahip),//SAHİP İD
 
   "dashboard" : {
-    "oauthSecret": "FP4L79p6QgYlnPnQ4iwgM3Lywg7Xxn7L",// BOTUNUZUN SECRET IDSI
-    "callbackURL": "http://abalone-apple-fear.glitch.me/callback",//CALLBACK URL ADRESİNİZ
-    "sessionSecret": "FP4L79p6QgYlnPnQ4iwgM3Lywg7Xxn7L",
-    "domain": "https://abalone-apple-fear.glitch.me",//PROJE LİNKİNİZ
+    "oauthSecret": (process.env.secret),// BOTUNUZUN SECRET IDSI
+    "callbackURL": (process.env.callback),//CALLBACK URL ADRESİNİZ
+    "sessionSecret": (process.env.secret2),
+    "domain": (process.env.domain),//PROJE LİNKİNİZ
     "port": 8000
   },
 };
